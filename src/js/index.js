@@ -17,7 +17,7 @@ var ngModule = angular.module('futureStore', [])
     .service('ShoppingCartService', ['$q', '$timeout', '$document', 'FutureStoreApi', function($q, $timeout, $document, FutureStoreApi){
 
         var loadedCartData = false;
-
+        var taxPercent = 0.13;
         var cartContents = [];
 
         this.loadCartData = function(){
@@ -39,6 +39,20 @@ var ngModule = angular.module('futureStore', [])
 
         this.setCartContents = function(cart) {
             cartContents = cart;
+        };
+
+        this.getCartTotal = function(cart){
+            return _.reduce(cart, function(sum, item){
+                return sum + (item.price * item.count);
+            }, 0);
+        };
+
+        this.getTaxes = function (total) {
+            return total * (taxPercent);
+        };
+
+        this.getTaxPercentage = function () {
+            return taxPercent;
         };
 
         this.validateCreditCard = function(creditCardData){
@@ -139,14 +153,16 @@ var ngModule = angular.module('futureStore', [])
 
         this.loadCartData();
     }])
-    .controller('FutureStoreCheckoutController', ['ShoppingCartService', '$scope', function(ShoppingCartService, $scope){
+    .controller('StoreCheckoutController', ['ShoppingCartService', '$scope', function(ShoppingCartService, $scope){
         var _this = this;
+        this.id = _.uniqueId('storeCheckout');
 
         this.reset = function() {
-            _this.shoppingCart = [];
-            _this.creditCard = {};
-            _this.billingAddress = {};
-            _this.shippingAddress = {};
+            this.shoppingCart = [];
+            this.creditCard = {};
+            this.billingAddress = {};
+            this.shippingAddress = {};
+            this.shippingIsBilling = true;
         };
 
         this.syncCartData = function(){
@@ -187,11 +203,36 @@ var ngModule = angular.module('futureStore', [])
         this.syncCartData();
 
     }])
-    .controller('ShoppingCartController', function(){
+    .directive('storeCheckout', function(){
+        return {
+            restrict:'E',
+            controller:'StoreCheckoutController as ctrl',
+            templateUrl:'store-checkout-template.html'
+        }
+    })
+    .controller('ShoppingCartController', ['ShoppingCartService', function(ShoppingCartService){
         this.cartContents = this.cartContents || [];
 
-        
-    })
+        this.deleteProduct = function (productData) {
+            _.remove(this.cartContents, {sku:productData ? productData.sku : null});
+        };
+
+        this.getCartSubTotal = function(){
+            return ShoppingCartService.getCartTotal(this.cartContents);
+        };
+
+        this.getCartTaxes = function(){
+            return ShoppingCartService.getTaxes(this.getCartTotal());
+        };
+
+        this.getTotalPrice = function(){
+            return this.getCartTotal() + this.getCartTaxes();
+        };
+
+        this.emptyCart = function(){
+            this.cartContents = [];
+        };
+    }])
     .directive('shoppingCart', function(){
         return {
             restrict:'E',
@@ -204,17 +245,111 @@ var ngModule = angular.module('futureStore', [])
         };
     })
     .controller('CartItemController', function(){
+        this.productData = this.productData || null;
+        this.shoppingCartCtrl = null;
 
+        this.config = function(shoppingCartCtrl){
+            this.shoppingCartCtrl = shoppingCartCtrl;
+        };
+
+        this.deleteProduct = function () {
+            if (!this.shoppingCartCtrl) {
+                return;
+            }
+            this.shoppingCartCtrl.deleteProduct(this.productData);
+        };
+
+        this.incCount = function() {
+            this.productData.count += 1;
+        };
+
+        this.decCount = function() {
+            this.productData.count -= 1;
+        };
+
+        this.getSubTotal = function() {
+            return this.productData.count & this.productData.price;
+        };
     })
     .directive('cartItem', function(){
         return {
             restrict:'E',
-            require:'^shoppingCart',
+            require:['^shoppingCart', 'cartItem'],
             templateUrl:'cart-item-template.html',
             controller:'CartItemController as ctrl',
             bindToController:true,
             scope:{
                 productData:'='
+            },
+            link:function(scope, element, attrs, ctrls){
+                var shoppingCartCtrl = ctrls[0];
+                var cartItemCtrl = ctrls[1];
+                cartItemCtrl.config(shoppingCartCtrl);
             }
         }
+    })
+    .controller('CreditCardEntryController', function(){
+        var ngModelCtrl = null;
+        this.id = _.uniqueId('ccE');
+        this.number = '';
+        this.name = '';
+        this.ccv = '';
+        this.expiryMonth = null;
+        this.expiryYear = null;
+
+        this.expiryMonthOptions = [1,2,3,4,5,6,7,8,9,10,11,12];
+        this.expiryYearOptions = [15, 16, 17, 18, 19, 20, 21, 22, 23];
+
+        this.config = function(ngModelController) {
+            ngModelCtrl = ngModelController;
+        };
+
+
+    })
+    .directive('creditCardEntry', function () {
+        return {
+            restrict:'E',
+            require:['creditCardEntry', 'ngModel'],
+            templateUrl:'credit-card-entry-template.html',
+            controller:'CreditCardEntryController as ctrl',
+            scope:true,
+            bindToController:true
+            link:function(scope, element, attrs, ctrls){
+                var creditCardEntryCtrl = ctrls[0];
+                var ngModelCtrl = ctrls[1];
+                creditCardEntryCtrl.config(ngModelCtrl);
+            }
+        };
+    })
+    .controller('AddressEntryController', function(){
+        var ngModelCtrl = null;
+        this.id= _.uniqueId('addressEntry');
+        this.name = '';
+        this.address1 = '';
+        this.address2 = '';
+        this.city = '';
+        this.state = '';
+        this.country = '';
+        this.zipPc = '';
+
+        this.config = function(ngModelController) {
+            ngModelCtrl = ngModelController;
+        };
+
+
+    })
+    .directive('addressEntry', function () {
+        return {
+            restrict:'E',
+            require:['addressEntry', 'ngModel'],
+            templateUrl:'address-entry-template.html',
+            controller:'AddressEntryController as ctrl',
+            scope:true,
+            bindToController:true
+            link:function(scope, element, attrs, ctrls){
+                var addressEntryCtrl = ctrls[0];
+                var ngModelCtrl = ctrls[1];
+                addressEntryCtrl.config(ngModelCtrl);
+            }
+        };
     });

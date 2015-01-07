@@ -8,19 +8,22 @@
 </head>
 <body>
 
+<store-checkout></store-checkout>
 
 <script type="text/futureStore-data" id = "cartContents">
     {
     "cartContents":[
     {
     "sku":"1234",
-    "name":"Sneakers",
+    "imgSrc":"http://placehold.it/50x50",
+    "name":"Awesome Pixel Art",
     "price":56.99,
     "count":2
     },
     {
     "sku":"34234",
-    "name":"Sweater",
+    "imgSrc":"http://placekitten.com/g/50/50",
+    "name":"Cute Kitten Print",
     "price":21.15,
     "count":1
     }
@@ -28,8 +31,187 @@
     }
 </script>
 
-<script type="text/ng-template" id="shopping-cart-template.html">
+<script type="text/ng-template" id="store-checkout-template.html">
+    <div class="store-checkout">
+        <div class="row">
+            <div class="small-12 columns">
+                <h1>Checkout:</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <h3>Review your order:</h3>
+            </div>
+        </div>
+        <div class="row">
+            <shopping-cart cart-contents="ctrl.shoppingCart"></shopping-cart>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <h3>Payment & Shipping</h3>
+            </div>
+        </div>
+        <div class="row">
+            <credit-card-entry ng-model="ctrl.creditCard"></credit-card-entry>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <h4>Billing Address:</h4>
+            </div>
+        </div>
+        <div class="row">
+            <address-entry ng-model="ctrl.billingAddress"></address-entry>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <h4>Shipping Address:</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <input type="checkbox" id = "{{ctrl.id + 'billingIsShipping'}}" ng-model="ctrl.shippingIsBilling"/>
+                <label for="{{ctrl.id + 'billingIsShipping'}}">Ship To Billing Address</label>
+            </div>
+        </div>
+        <div class="row" ng-show="!ctrl.shippingIsBilling">
+            <address-entry ng-model="ctrl.shippingAddress"></address-entry>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <button ng-click="ctrl.checkout()">Submit Order</button>
+            </div>
+        </div>
+    </div>
+</script>
 
+
+<script type="text/ng-template" id="shopping-cart-template.html">
+    <div class="shopping-cart">
+        <div class="row">
+            <div class="small-12 columns">
+                <cart-item ng-repeat="product in ctrl.cartContents"
+                           product-data="product">
+                </cart-item>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-8 columns">&nbsp;</div>
+            <div class="small-4 columns">
+                <h5 class="price-heading">Cart Total (Before Tax):</h5>
+                <h6 class="price-detail">{{ctrl.getCartSubTotal() | currency}}</h6>
+                <h5 class="price-heading">Taxes:</h5>
+                <h6 class="price-detail">{{ctrl.getCartTaxes() | currency}}</h6>
+                <h5 class="price-heading">Cart Total:</h5>
+                <h6 class="price-detail">{{ctrl.getTotalPrice() | currency}}</h6>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="cart-item-template.html">
+    <div class="row cart-item">
+        <div class="small-8 columns">
+            <img src="{{::ctrl.productData.imgSrc}}" alt="{{::ctrl.productData.name}}"/>
+            <h4 class="productName">{{::ctrl.productData.name}}</h4>
+        </div>
+        <div class="small-4 columns">
+            <div class="cart-item-price">
+                <h6 class="price-heading">Unit Price:</h6>
+                <span class="price-detail">{{::ctrl.productData.price | currency}}</span>
+            </div>
+            <div class="cart-item-price-control">
+                <button ng-click="ctrl.decCount()">-</button>
+                <input type="number" ng-model="ctrl.productData.count"/>
+                <button ng-click="ctrl.decCount()">+</button>
+                <button ng-click="ctrl.deleteProduct()">Remove From Cart</button>
+            </div>
+            <div class="cart-item-price">
+                <h6 class="price-heading">Total:</h6>
+                <span class="price-detail">{{ctrl.getSubTotal() | currency}}</span>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="credit-card-entry-template.html">
+    <div class="credit-card-entry">
+        <div class="row">
+            <div class="small-12 columns">
+                <label for="{{ctrl.id + 'number'}}">Credit Card Number:</label>
+                <input id="{{ctrl.id + 'number'}}" type="text" ng-model="ctrl.number"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <label for="{{ctrl.id + 'name'}}">Cardholder Name:</label>
+                <input id="{{ctrl.id + 'name'}}" type="text" ng-model="ctrl.name"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-4 columns">
+                <label for="{{ctrl.id + 'expiryMonth'}}">Expiry Month:</label>
+                <select name="{{ctrl.id + 'expiryMonth'}}"
+                        id="{{ctrl.id + 'expiryMonth'}}"
+                        ng-model="ctrl.expiryMonth"
+                        ng-options="ctrl.expiryMonthOptions">
+                    <option value="null">--</option>
+                </select>
+            </div>
+            <div class="small-4 columns">
+                <label for="{{ctrl.id + 'expiryYear'}}">Expiry Year:</label>
+                <select name="{{ctrl.id + 'expiryYear'}}"
+                        id="{{ctrl.id + 'expiryYear'}}"
+                        ng-model="ctrl.expiryYear"
+                        ng-options="ctrl.expiryYearOptions">
+                    <option value="null">--</option>
+                </select>
+            </div>
+            <div class="small-4 columns">
+                <label for="{{ctrl.id + 'ccv'}}">CCV (Back of Card):</label>
+                <input id="{{ctrl.id + 'ccv'}}" type="text" ng-model="ctrl.ccv"/>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="address-entry-template.html">
+    <div class="address-entry">
+        <div class="row">
+            <div class="small-12 columns">
+                <label for="{{ctrl.id + 'addressName'}}">Name:</label>
+                <input id="{{ctrl.id + 'addressName'}}" type="text" ng-model="ctrl.name"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <label for="{{ctrl.id + 'address1'}}">Address Line 1:</label>
+                <input id="{{ctrl.id + 'address1'}}" type="text" ng-model="ctrl.address1"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <label for="{{ctrl.id + 'address2'}}">Address Line 2:</label>
+                <input id="{{ctrl.id + 'address2'}}" type="text" ng-model="ctrl.address2"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-6 columns">
+                <label for="{{ctrl.id + 'city'}}">City:</label>
+                <input id="{{ctrl.id + 'city'}}" type="text" ng-model="ctrl.city"/>
+            </div>
+            <div class="small-6 columns">
+                <label for="{{ctrl.id + 'state'}}">State:</label>
+                <input id="{{ctrl.id + 'state'}}" type="text" ng-model="ctrl.state"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-6 columns">
+                <label for="{{ctrl.id + 'country'}}">Country:</label>
+                <input id="{{ctrl.id + 'country'}}" type="text" ng-model="ctrl.country"/>
+            </div>
+            <div class="small-6 columns">
+                <label for="{{ctrl.id + 'zipPc'}}">Zip / Postal Code:</label>
+                <input id="{{ctrl.id + 'zipPc'}}" type="text" ng-model="ctrl.zipPc"/>
+            </div>
+        </div>
+    </div>
 </script>
 
 <script src="../bower_components/angular/angular.min.js"></script>

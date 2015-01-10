@@ -5,7 +5,7 @@
 
 var ngModule = angular.module('futureStore', [])
     .service('FutureStoreApi', ['$q', function($q){
-        this.newOrder = function(inventory, creditCardData, billingAddress, shippingAddress){
+        this.placeOrder = function(products, creditCardData, billingAddress, shippingAddress){
             return $q(function(resolve, reject){
                 resolve({
                     orderId: _.uniqueId('order'),
@@ -13,26 +13,34 @@ var ngModule = angular.module('futureStore', [])
                 });
             });
         };
+        return this;
     }])
     .service('ShoppingCartService', ['$q', '$timeout', '$document', 'FutureStoreApi', function($q, $timeout, $document, FutureStoreApi){
-
+        var _this = this;
         var loadedCartData = false;
         var taxPercent = 0.13;
         var cartContents = [];
 
         this.loadCartData = function(){
-            var $cartContents = angular.element($document[0].querySelector("cartContents"));
-            cartContents = JSON.parse($cartContents.html());
-            loadedCartData = true;
+            var $cartContents = angular.element($document[0].querySelector("#cartContents"));
+            var data = JSON.parse($cartContents.html());
+            if (data && data.cartContents) {
+                cartContents = data.cartContents;
+                loadedCartData = true;
+            }
         };
 
         this.getCartData = function() {
             return $q(function (resolve, reject) {
                 $timeout(function () {
                     if (!loadedCartData){
-                        this.loadCartData();
+                        try {
+                            _this.loadCartData();
+                        }catch (e){
+                            return reject('Error loading shopping cart');
+                        }
                     }
-                    resolve(cartContents);
+                    return resolve(cartContents);
                 });
             });
         };
@@ -117,6 +125,8 @@ var ngModule = angular.module('futureStore', [])
             return address;
         };
 
+
+
         this.checkout = function (creditCardData, billingAddress, shippingAddress) {
             var _this = this;
 
@@ -127,24 +137,24 @@ var ngModule = angular.module('futureStore', [])
                     ccData = _this.validateCreditCard(creditCardData);
 
                 } catch (e) {
-                    reject('Invalid Credit Card');
+                    return reject('Invalid Credit Card');
                 }
 
                 // Validate the addresses
                 try {
                     bAddress = _this.validateAddress(billingAddress);
                 } catch (e) {
-                    reject('Invalid Billing Address');
+                    return reject('Invalid Billing Address');
                 }
 
                 try {
                     sAddress = _this.validateAddress(shippingAddress);
                 } catch (e) {
-                    reject('Invalid Shipping Address');
+                    return reject('Invalid Shipping Address');
                 }
 
                 // Make the purchase. If it's successful, empty the shopping cart.
-                FutureStoreApi.makePurchase(inventory, ccData, bAddress, sAddress).then(function (confirmation) {
+                FutureStoreApi.placeOrder(cartContents, ccData, bAddress, sAddress).then(function (confirmation) {
                     _this.setCartContents([]);
                     resolve(confirmation);
                 }, reject);
@@ -152,8 +162,10 @@ var ngModule = angular.module('futureStore', [])
         };
 
         this.loadCartData();
+
+        return this;
     }])
-    .controller('StoreCheckoutController', ['ShoppingCartService', '$scope', function(ShoppingCartService, $scope){
+    .controller('StoreCheckoutController', ['ShoppingCartService', function(ShoppingCartService){
         var _this = this;
         this.id = _.uniqueId('storeCheckout');
 
@@ -172,27 +184,23 @@ var ngModule = angular.module('futureStore', [])
         };
 
 
-        $scope.$watchCollection(function(){
-            return _this.shoppingCart;
-        }, function(){
-            ShoppingCartService.setCartContents(_this.shoppingCart);
-        });
-
-
         this.checkout = function() {
 
             var successfulCheckout = function (orderConfirmation) {
-
+                alert('Placed your order. Order Number: ' + orderConfirmation.orderId + ' Tracking Number: ' + orderConfirmation.trackingNumber);
             };
 
             var failedCheckout = function (failedReason) {
-
+                alert('Unable to place your order. ' + failedReason);
             };
+
+            var billingAddress = _this.billingAddress;
+            var shippingAddress = _this.shippingIsBilling ? _this.billingAddress : _this.shippingAddress;
 
             ShoppingCartService.setCartContents(_this.shoppingCart);
             ShoppingCartService.checkout(_this.creditCard,
-                                         _this.billingAddress,
-                                         _this.shippingAddress)
+                                         billingAddress,
+                                         shippingAddress)
                                 .then(successfulCheckout, failedCheckout)
                                 .finally(function(){
                                     _this.syncCartData();
@@ -206,6 +214,7 @@ var ngModule = angular.module('futureStore', [])
     .directive('storeCheckout', function(){
         return {
             restrict:'E',
+            replace:true,
             controller:'StoreCheckoutController as ctrl',
             templateUrl:'store-checkout-template.html'
         }
@@ -222,11 +231,11 @@ var ngModule = angular.module('futureStore', [])
         };
 
         this.getCartTaxes = function(){
-            return ShoppingCartService.getTaxes(this.getCartTotal());
+            return ShoppingCartService.getTaxes(this.getCartSubTotal());
         };
 
         this.getTotalPrice = function(){
-            return this.getCartTotal() + this.getCartTaxes();
+            return this.getCartSubTotal() + this.getCartTaxes();
         };
 
         this.emptyCart = function(){
@@ -236,6 +245,7 @@ var ngModule = angular.module('futureStore', [])
     .directive('shoppingCart', function(){
         return {
             restrict:'E',
+            replace:true,
             templateUrl:'shopping-cart-template.html',
             controller:'ShoppingCartController as ctrl',
             bindToController:true,
@@ -244,36 +254,59 @@ var ngModule = angular.module('futureStore', [])
             }
         };
     })
-    .controller('CartItemController', function(){
+    .controller('CartItemController', ['$window', function($window){
+        var _this = this;
         this.productData = this.productData || null;
         this.shoppingCartCtrl = null;
+
+        var confirmDeletion = function () {
+            return $window.confirm(
+                'Are you sure you want to remove ' +
+                ((_this.productData) ? _this.productData.name : 'this product') +
+                ' from your cart?');
+        };
+
+        var deleteProductFromCart = function (){
+            if (!_this.shoppingCartCtrl) {
+                return;
+            }
+            _this.shoppingCartCtrl.deleteProduct(_this.productData);
+        }
 
         this.config = function(shoppingCartCtrl){
             this.shoppingCartCtrl = shoppingCartCtrl;
         };
 
         this.deleteProduct = function () {
-            if (!this.shoppingCartCtrl) {
-                return;
+            if (confirmDeletion()) {
+                deleteProductFromCart();
             }
-            this.shoppingCartCtrl.deleteProduct(this.productData);
         };
+
+
 
         this.incCount = function() {
             this.productData.count += 1;
         };
 
         this.decCount = function() {
-            this.productData.count -= 1;
+            if (this.productData.count > 1 || confirmDeletion()) {
+                this.productData.count -= 1;
+                if (this.productData.count <= 0) {
+                    deleteProductFromCart();
+                }
+            }
         };
 
         this.getSubTotal = function() {
             return this.productData.count & this.productData.price;
         };
-    })
+
+    }])
     .directive('cartItem', function(){
         return {
             restrict:'E',
+            replace:true,
             require:['^shoppingCart', 'cartItem'],
             templateUrl:'cart-item-template.html',
             controller:'CartItemController as ctrl',
@@ -297,8 +330,30 @@ var ngModule = angular.module('futureStore', [])
         this.expiryMonth = null;
         this.expiryYear = null;
 
-        this.expiryMonthOptions = [1,2,3,4,5,6,7,8,9,10,11,12];
-        this.expiryYearOptions = [15, 16, 17, 18, 19, 20, 21, 22, 23];
+        this.expiryMonthOptions = [
+            {label:'Jan', value:1},
+            {label:'Feb', value:2},
+            {label:'Mar', value:3},
+            {label:'Apr', value:4},
+            {label:'May', value:5},
+            {label:'Jun', value:6},
+            {label:'Jul', value:7},
+            {label:'Aug', value:8},
+            {label:'Sept', value:9},
+            {label:'Oct', value:10},
+            {label:'Nov', value:11},
+            {label:'Dec', value:12}
+        ];
+        this.expiryYearOptions = [
+            {label:'2015', value: 15},
+            {label:'2016', value: 16},
+            {label:'2017', value: 17},
+            {label:'2018', value: 18},
+            {label:'2019', value: 19},
+            {label:'2020', value: 20},
+            {label:'2021', value: 21},
+            {label:'2022', value: 22},
+            {label:'2023', value: 23}];
 
         this.config = function(ngModelController) {
             ngModelCtrl = ngModelController;
@@ -309,11 +364,12 @@ var ngModule = angular.module('futureStore', [])
     .directive('creditCardEntry', function () {
         return {
             restrict:'E',
+            replace:true,
             require:['creditCardEntry', 'ngModel'],
             templateUrl:'credit-card-entry-template.html',
             controller:'CreditCardEntryController as ctrl',
             scope:true,
-            bindToController:true
+            bindToController:true,
             link:function(scope, element, attrs, ctrls){
                 var creditCardEntryCtrl = ctrls[0];
                 var ngModelCtrl = ctrls[1];
@@ -341,11 +397,12 @@ var ngModule = angular.module('futureStore', [])
     .directive('addressEntry', function () {
         return {
             restrict:'E',
+            replace:true,
             require:['addressEntry', 'ngModel'],
             templateUrl:'address-entry-template.html',
             controller:'AddressEntryController as ctrl',
             scope:true,
-            bindToController:true
+            bindToController:true,
             link:function(scope, element, attrs, ctrls){
                 var addressEntryCtrl = ctrls[0];
                 var ngModelCtrl = ctrls[1];

@@ -1,0 +1,16 @@
+body
+{
+    background: url("../../images/chruch.png");
+}
+
+.cart-item-price-control .button
+{
+    margin-right: 15px;
+    margin-top: 2em;
+    margin-bottom: 0;
+}
+
+.cart-item
+{
+    margin-bottom: 1em;
+}

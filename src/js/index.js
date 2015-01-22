@@ -3,8 +3,10 @@
  */
 
 
-var ngModule = angular.module('futureStore', [])
-    .service('FutureStoreApi', ['$q', function($q){
+var ShoppingCart = angular.module('futureStore', [])
+    .service('OrderService', ['$q', function($q){
+
+
         this.placeOrder = function(products, creditCardData, billingAddress, shippingAddress){
             return $q(function(resolve, reject){
                 resolve({
@@ -15,10 +17,10 @@ var ngModule = angular.module('futureStore', [])
         };
         return this;
     }])
-    .service('ShoppingCartService', ['$q', '$timeout', '$document', 'FutureStoreApi', function($q, $timeout, $document, FutureStoreApi){
+    .service('ShoppingCart', ['$q', '$timeout', '$document', 'OrderService', function($q, $timeout, $document, OrderService){
         var _this = this;
         var loadedCartData = false;
-        var taxPercent = 0.13;
+        var taxRate = 0.13;
         var cartContents = [];
 
         this.loadCartData = function(){
@@ -45,61 +47,50 @@ var ngModule = angular.module('futureStore', [])
             });
         };
 
+        /**
+         * Set the contents of the shopping cart
+         * @param cart The shopping cart to set
+         */
         this.setCartContents = function(cart) {
             cartContents = cart;
         };
 
+        /**
+         * Calculate the total value of a shopping cart
+         * @param cart The shopping cart to calculate the cost of.
+         */
         this.getCartTotal = function(cart){
             return _.reduce(cart, function(sum, item){
                 return sum + (item.price * item.count);
             }, 0);
         };
 
+        /**
+         * Determine how much tax applies to a cost
+         * @param total The cost, pre-tax.
+         */
         this.getTaxes = function (total) {
-            return total * (taxPercent);
+            return total * (taxRate);
         };
 
+        /**
+         * Get the tax rate
+         */
         this.getTaxPercentage = function () {
-            return taxPercent;
+            return taxRate;
         };
 
-        this.validateCreditCard = function(creditCardData){
-            var ccNumber = creditCardData.number;
-            ccNumber = ccNumber.replaceAll(/[\-\s]*/gi, '');
 
-            if (ccNumber.length < 16) {
-                throw new Error('Card Number Invalid');
-            }
+        this.loadCartData();
 
-            var ccv = creditCardData.ccv.trim();
-            if (ccv.length < 3){
-                throw new Error('Invalid CCV');
-            }
+        return this;
+    }])
+    .service('PostOffice', ['$q', function(){
 
-            var month = creditCardData.expiryMonth;
-            if (month < 0 || month > 12){
-                throw new Error('Invalid Expiry Month');
-            }
-
-            var year = creditCardData.expiryYear;
-            if (year < 2015) {
-                throw new Error('Card is expired');
-            }
-
-            var name = creditCardData.cardholderName.trim();
-            if (!name.length){
-                throw new Error('Invalid Cardholder Name');
-            }
-
-            return {
-                number:ccNumber,
-                ccv: ccv,
-                month:month,
-                year:year,
-                cardholderName:name
-            };
-        };
-
+        /**
+         * Validate an address
+         * @param address The address to validate.
+         */
         this.validateAddress = function(address){
             if (!address.name) {
                 throw new Error('Name cannot be blank');
@@ -124,48 +115,80 @@ var ngModule = angular.module('futureStore', [])
             }
             return address;
         };
+    }])
+    .service('BankTeller', ['$q', function($q){
 
 
 
-        this.checkout = function (creditCardData, billingAddress, shippingAddress) {
-            var _this = this;
+        this.validateNumber = function(cardNumber){
+            return $q(function(resolve, reject) {
+                var ccNumber = cardNumber;
+                ccNumber = ccNumber.replaceAll(/[\-\s]*/gi, '');
 
-            return $q(function(resolve, reject){
-                var ccData, bAddress, sAddress;
-                // Validate the credit card
-                try {
-                    ccData = _this.validateCreditCard(creditCardData);
-
-                } catch (e) {
-                    return reject('Invalid Credit Card');
+                if (ccNumber.length < 16) {
+                    return reject('Card Number Invalid');
                 }
-
-                // Validate the addresses
-                try {
-                    bAddress = _this.validateAddress(billingAddress);
-                } catch (e) {
-                    return reject('Invalid Billing Address');
-                }
-
-                try {
-                    sAddress = _this.validateAddress(shippingAddress);
-                } catch (e) {
-                    return reject('Invalid Shipping Address');
-                }
-
-                // Make the purchase. If it's successful, empty the shopping cart.
-                FutureStoreApi.placeOrder(cartContents, ccData, bAddress, sAddress).then(function (confirmation) {
-                    _this.setCartContents([]);
-                    resolve(confirmation);
-                }, reject);
+                resolve(ccNumber);
             });
         };
 
-        this.loadCartData();
+        this.validateCcv = function(ccv){
+            return $q(function(resolve, reject) {
+                var ccv = ccv.trim();
+                if (ccv.length < 3){
+                    return reject('Invalid CCV');
+                }
+                resolve(ccv);
+            });
+        };
 
-        return this;
+        this.validateCreditCard = function(creditCardData){
+
+            var numberValidation = $q(function (resolve, reject) {
+                var month = creditCardData.expiryMonth;
+                if (month < 0 || month > 12){
+                    return reject('Invalid Expiry Month');
+                }
+
+                var year = creditCardData.expiryYear;
+                if (year < 2015) {
+                    return reject('Card is expired');
+                }
+
+
+                resolve({
+                    month:month,
+                    year:year
+                });
+            });
+
+            var nameValidation = $q(function(resolve, reject){
+
+                var name = creditCardData.cardholderName.trim();
+                if (!name.length){
+                    return reject('Invalid Cardholder Name');
+                }
+                resolve(name);
+            });
+
+
+            return $q.all([
+                nameValidation,
+                this.validateNumber(creditCardData.number),
+                this.validateCcv(creditCardData.ccv),
+                numberValidation
+            ]).then(function(name, number, ccv, monthAndYear) {
+                return {
+                number:number,
+                ccv: ccv,
+                month:monthAndYear.month,
+                year:monthAndYear.year,
+                cardholderName:name
+            }});
+        };
+
     }])
-    .controller('StoreCheckoutController', ['ShoppingCartService', function(ShoppingCartService){
+    .controller('StoreCheckoutController', ['ShoppingCart', function(ShoppingCartService){
         var _this = this;
         this.id = _.uniqueId('storeCheckout');
 
@@ -184,6 +207,8 @@ var ngModule = angular.module('futureStore', [])
         };
 
 
+
+
         this.checkout = function() {
 
             var successfulCheckout = function (orderConfirmation) {
@@ -196,6 +221,8 @@ var ngModule = angular.module('futureStore', [])
 
             var billingAddress = _this.billingAddress;
             var shippingAddress = _this.shippingIsBilling ? _this.billingAddress : _this.shippingAddress;
+
+
 
             ShoppingCartService.setCartContents(_this.shoppingCart);
             ShoppingCartService.checkout(_this.creditCard,
@@ -219,7 +246,7 @@ var ngModule = angular.module('futureStore', [])
             templateUrl:'store-checkout-template.html'
         }
     })
-    .controller('ShoppingCartController', ['ShoppingCartService', function(ShoppingCartService){
+    .controller('ShoppingCartController', ['ShoppingCart', function(ShoppingCartService){
         this.cartContents = this.cartContents || [];
 
         this.deleteProduct = function (productData) {
@@ -299,7 +326,7 @@ var ngModule = angular.module('futureStore', [])
         };
 
         this.getSubTotal = function() {
-            return this.productData.count & this.productData.price;
+            return this.productData.count * this.productData.price;
         };
 
     }])
@@ -321,7 +348,8 @@ var ngModule = angular.module('futureStore', [])
             }
         }
     })
-    .controller('CreditCardEntryController', function(){
+    .controller('CreditCardEntryController', ['$scope', 'BankTeller', function($scope, BankTeller){
+        var _this = this;
         var ngModelCtrl = null;
         this.id = _.uniqueId('ccE');
         this.number = '';
@@ -330,6 +358,7 @@ var ngModule = angular.module('futureStore', [])
         this.expiryMonth = null;
         this.expiryYear = null;
 
+        // Options for the expiry month
         this.expiryMonthOptions = [
             {label:'Jan', value:1},
             {label:'Feb', value:2},
@@ -344,6 +373,7 @@ var ngModule = angular.module('futureStore', [])
             {label:'Nov', value:11},
             {label:'Dec', value:12}
         ];
+        // Options for the expiry year
         this.expiryYearOptions = [
             {label:'2015', value: 15},
             {label:'2016', value: 16},
@@ -357,10 +387,36 @@ var ngModule = angular.module('futureStore', [])
 
         this.config = function(ngModelController) {
             ngModelCtrl = ngModelController;
+            ngModelCtrl.$render = function(){return _this.$render();};
+            ngModelCtrl.$asyncValidators.entireCard = function (modelValue, viewValue) {
+                var value = modelValue || viewValue;
+                return BankTeller.validateCreditCard(value);
+            };
+
         };
 
+        this.pushToModel = function () {
+            ngModelCtrl.$setViewValue({
+                number:this.number,
+                name:this.name,
+                ccv:this.ccv,
+                expiryMonth:this.expiryMonth,
+                expiryYear:this.expiryYear
+            });
+        };
 
-    })
+        $scope.$watchGroup([
+            function () { return _this.number;},
+            function () { return _this.name;},
+            function () { return _this.ccv;},
+            function () { return _this.expiryMonth;},
+            function () { return _this.expiryYear;}],
+            function(){
+               _this.pushToModel();
+            });
+
+
+    }])
     .directive('creditCardEntry', function () {
         return {
             restrict:'E',

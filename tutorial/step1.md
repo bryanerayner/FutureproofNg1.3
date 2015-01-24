@@ -103,3 +103,9 @@ ever elegant
 #### AddressEntryController and <address-entry>
     // Similar to CreditCardEntryController, this directive works with ng-model to interact with an Address data type.
 
+
+
+## Preparation for Step 2
+
+There we have it - A working Angular application that is likely on par with what you'll find after just a few weeks developing
+any real world application. Now, we'll go through the (relatively) painless task of converting to Typescript.

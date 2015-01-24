@@ -167,60 +167,74 @@
 </script>
 <script type="text/ng-template" id="credit-card-entry-template.html">
     <div class="credit-card-entry panel">
-        <div ng-form="ctrl.creditCardForm">
-        <div class="row">
-            <div class="small-12 columns">
-                <label>Credit Card Number:
-                    <input type="text"
-                           ng-model="ctrl.number"
-                           ng-minlength="16"
-                           ng-maxlength="16" />
-                </label>
-            </div>
-        </div>
+        <form name="creditCardForm">
             <div class="row">
                 <div class="small-12 columns">
-                    <div class="alert">{{ctrl.creditCardForm.number.$error}}</div>
+                    <label>Credit Card Number:
+                        <input type="text"
+                               name="cardNumber"
+                               ng-model="ctrl.number"
+                               ng-minlength="16"
+                               ng-maxlength="16" />
+                    </label>
+                </div>
+                <div ng-messages="creditCardForm.cardNumber.$error">
+                    <div ng-message="maxlength" class="panel callout radius">
+                        <p>Too many numbers</p>
+                    </div>
                 </div>
             </div>
-        <div class="row">
-            <div class="small-12 columns">
-                <label>Cardholder Name:
-                    <input type="text"
-                           ng-model="ctrl.name"
-                           ng-minlength="1"  />
-                </label>
+            <div class="row">
+                <div class="small-12 columns">
+                    <label>Cardholder Name:
+                        <input type="text"
+                               name="cardholderName"
+                               ng-model="ctrl.name"
+                               ng-minlength="1"  />
+                    </label>
+                </div>
+                <div ng-messages="ctrl.creditCardForm.cardholderName.$error">
+                    <div ng-message="ctrl.creditCardForm.cardholderName.$error.minlength" class="panel callout radius">
+                        <p>Please fill out your card name</p>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="small-4 columns">
-                <label>Expiry Month:
-                    <select name="expiryMonth"
-                            ng-model="ctrl.expiryMonth"
-                            ng-options="month.value as month.label for month in ctrl.expiryMonthOptions">
-                        <option value="null">--</option>
-                    </select>
-                </label>
+            <div class="row">
+                <div class="small-4 columns">
+                    <label>Expiry Month:
+                        <select name="expiryMonth"
+                                ng-model="ctrl.expiryMonth"
+                                ng-options="month.value as month.label for month in ctrl.expiryMonthOptions">
+                            <option value="null">--</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="small-4 columns">
+                    <label>Expiry Year:
+                        <select name="expiryYear"
+                                ng-model="ctrl.expiryYear"
+                                ng-options="year.value as year.label for year in ctrl.expiryYearOptions"
+                                ng-required="true">
+                            <option value="null">--</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="small-4 columns">
+                    <label>CCV (Back of Card):
+                        <input type="text"
+                               name="ccv"
+                               ng-model="ctrl.ccv"
+                               ng-minlength="3"
+                               ng-maxlength="3"/>
+                    </label>
+                    <div ng-messages="ctrl.creditCardForm.ccv.$error">
+                        <div ng-message="ctrl.creditCardForm.ccv.$error.maxlength" class="panel callout radius">
+                            <p>Invalid CCV</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="small-4 columns">
-                <label>Expiry Year:
-                    <select name="expiryYear"
-                            ng-model="ctrl.expiryYear"
-                            ng-options="year.value as year.label for year in ctrl.expiryYearOptions"
-                            ng-required="true">
-                        <option value="null">--</option>
-                    </select>
-                </label>
-            </div>
-            <div class="small-4 columns">
-                <label>CCV (Back of Card):
-                    <input type="text"
-                           ng-model="ctrl.ccv"
-                           ng-minlength="3" />
-                </label>
-            </div>
-        </div>
-        </div>
+        </form>
     </div>
 </script>
 <script type="text/ng-template" id="address-entry-template.html">
@@ -300,6 +314,7 @@
 
 <script src="../../bower_components/lodash/lodash.min.js"></script>
 <script src="../../bower_components/angular/angular.min.js"></script>
+<script src="../../bower_components/angular-messages/angular-messages.min.js"></script>
 <script src="../js/index.js"></script>
 </body>
 </html>

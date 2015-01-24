@@ -31,7 +31,7 @@ describe('StoreCheckoutController', function () {
       return stubWindow('alert');
     };
 
-    beforeEach(module('futureStore'));
+    beforeEach(module('futureStore.checkout'));
 
     beforeEach(function(){
 
@@ -149,7 +149,7 @@ describe('StoreCheckoutController', function () {
                resolvePromises();
                StoreCheckoutController.shoppingCart.should.deep.equal(testCart);
             });
-            it ('should set the contents of the ShoppingCart to an empty array after succesfully ordering a product', function(){
+            it ('should set the contents of the ShoppingCart to an empty array after successfully ordering a product', function(){
                 var setContentsSpy = sinon.spy(ShoppingCart, 'setCartContents');
                 orderShouldSucceed = true;
                 StoreCheckoutController.checkout();

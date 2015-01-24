@@ -8,7 +8,7 @@ describe('BankTeller', function(){
             $rootScope.$apply();
         }
     };
-    beforeEach(module('futureStore'));
+    beforeEach(module('futureStore.orders'));
 
 
 
@@ -33,63 +33,93 @@ describe('BankTeller', function(){
 
         describe('validateNumber', function () {
 
-            it('should return a rejected promise for invalid cards', function(){
-                var result = BankTeller.validateNumber('');
-                resolvePromises();
-                result.should.eventually.be.rejected;
-            });
-
-            it('should pass any 16 digit number', function(){
-                var result = BankTeller.validateNumber('1234567890123456');
-
-                resolvePromises();
-
-                result.should.eventually.equal(true);
-            });
-
-            it('should reject any number lower than 16 digits long', function(){
-
-                var result2 = BankTeller.validateNumber('123456789012345');
-
-                resolvePromises();
-                result2.should.eventually.be.rejected;
+            it('should return a rejected promise for invalid cards', function(done){
+                BankTeller.validateNumber('').then(function() {
+                    assert().fail('Should have rejected');
+                    done();
+                }, function(reason){
+                    reason.should.be.a('string');
+                    done();
                 });
-            it('should reject any number longer than 16 digits long', function() {
-                var result3 = BankTeller.validateNumber('12345678901234567');
                 resolvePromises();
-                result3.should.eventually.be.rejected;
             });
 
-            it('should be tolerant of dashes and whitespace', function(){
-                var result = BankTeller.validateNumber('1234-5678 9012 3456');
+            it('should pass any 16 digit number', function(done){
+                BankTeller.validateNumber('1234567890123456').then(function(isValid){
+                    expect(isValid).to.equal('1234567890123456');
+                    done();
+                });
                 resolvePromises();
-                result.should.eventually.be.rejected;
+            });
+
+            it('should reject any number lower than 16 digits long', function(done){
+
+                BankTeller.validateNumber('123456789012345').then(function() {
+                    assert().fail('Should have rejected');
+                    done();
+                },function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
+                resolvePromises();
+                });
+            it('should reject any number longer than 16 digits long', function(done) {
+                BankTeller.validateNumber('12345678901234567').then(function() {
+                    assert().fail('Should have rejected');
+                    done();
+                },function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
+                resolvePromises();
+            });
+
+            it('should be tolerant of dashes and whitespace', function(done){
+                BankTeller.validateNumber('1234-5678 9012 3456').then(function(isValid){
+                    expect(isValid).to.equal('1234567890123456');
+                    done();
+                }, function(){
+                    assert().fail();
+                    done();
+                });
+                resolvePromises();
             });
         });
 
         describe('validateCcv', function () {
 
 
-            it('should only accept three digit numbers', function() {
-                var result = BankTeller.validateCcv('123');
-
-
+            it('should only accept three digit numbers', function(done) {
+                BankTeller.validateCcv('123').then(function(isValid){
+                    expect(isValid).to.equal('123');
+                    done();
+                },function(reason){
+                    assert().fail();
+                    done();
+                });
                 resolvePromises();
-                result.should.eventually.equal(true);
             });
 
-            it ('should reject any alphanumeric numbers', function() {
-                var result2 = BankTeller.validateCcv('ab3');
-
+            it ('should reject any alphanumeric numbers', function(done) {
+                BankTeller.validateCcv('ab3').then(function() {
+                    assert().fail('Should have rejected');
+                    done();
+                },function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
                 resolvePromises();
-                result2.should.eventually.be.rejected;
             });
 
-            it ('should reject any number that\'s over 3 digits', function() {
-                var result3 = BankTeller.validateCcv('1234');
-
+            it ('should reject any number that\'s over 3 digits', function(done) {
+                BankTeller.validateCcv('1234').then(function() {
+                    assert().fail('Should have rejected');
+                    done();
+                },function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
                 resolvePromises();
-                result3.should.eventually.be.rejected;
             });
         });
 
@@ -110,45 +140,86 @@ describe('BankTeller', function(){
                 card = null;
             });
 
-            it('should reject invalid numbers', function () {
+            it('should reject undefined input', function (done) {
+                BankTeller.validateCreditCard().then(function() {
+                    assert().fail('Should have rejected');
+                    done();
+                },function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
+                resolvePromises();
+            });
+
+            it('should reject invalid numbers', function (done) {
                 card.number = '';
-                var result = BankTeller.validateCreditCard(card);
+                BankTeller.validateCreditCard(card).then(function() {
+                    assert().fail('Should have rejected');
+                    done();
+                },function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
                 resolvePromises();
-                result.should.eventually.be.rejected;
             });
 
-            it('should reject invalid names', function () {
+            it('should reject invalid names', function (done) {
                 card.cardholderName = '';
-                var result = BankTeller.validateCreditCard(card);
+                BankTeller.validateCreditCard(card).then(function() {
+                    assert().fail('Should have rejected');
+                    done();
+                },function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
                 resolvePromises();
-                result.should.eventually.be.rejected;
             });
 
-            it('should reject invalid CCVs', function () {
+            it('should reject invalid CCVs', function (done) {
                 card.ccv = '';
-                var result = BankTeller.validateCreditCard(card);
+                BankTeller.validateCreditCard(card).then(function() {
+                    assert().fail('Should have rejected');
+                    done();
+                },function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
                 resolvePromises();
-                result.should.eventually.be.rejected;
             });
 
-            it('should reject invalid months', function () {
-                card.month = -1;
-                var result = BankTeller.validateCreditCard(card);
+            it('should reject invalid months', function (done) {
+                card.expiryMonth = -1;
+                BankTeller.validateCreditCard(card).then(function() {
+                    assert().fail('Should have rejected');
+                    done();
+                },function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
                 resolvePromises();
-                result.should.eventually.be.rejected;
             });
 
-            it('should reject invalid years', function () {
-                card.month = 2014;
-                var result = BankTeller.validateCreditCard(card);
+            it('should reject invalid years', function (done) {
+                card.expiryYear = 14;
+                BankTeller.validateCreditCard(card).then(function() {
+                    assert().fail('Should have rejected');
+                    done();
+                },function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
                 resolvePromises();
-                result.should.eventually.be.rejected;
             });
 
-            it('should resolve to true for valid input', function(){
-               var result = BankTeller.validateCreditCard(card);
+            it('should resolve to true for valid input', function(done){
+              BankTeller.validateCreditCard(card).then(function(validCard){
+                   expect(validCard).to.deep.equal(card);
+                   done();
+               }, function() {
+                  assert().fail('Should have passed');
+                  done();
+              });
                 resolvePromises();
-                result.should.eventually.equal(true);
             });
         });
 

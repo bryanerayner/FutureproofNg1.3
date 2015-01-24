@@ -11,7 +11,7 @@ module.exports = function(config) {
 
         browsers: ['PhantomJS'],
 
-        logLevel: config.LOG_INFO
+        logLevel: config.LOG_ERROR
 
 
 

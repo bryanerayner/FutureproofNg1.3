@@ -11,7 +11,7 @@ describe('PostOffice', function(){
         }
     };
 
-    beforeEach(module('futureStore'));
+    beforeEach(module('futureStore.orders'));
     beforeEach(function(){
 
         testAddress = {
@@ -44,56 +44,88 @@ describe('PostOffice', function(){
             beforeEach(function(){
                 validateAddress= function(){
                     var promise = PostOffice.validateAddress(testAddress);
-                    resolvePromises();
+
                     return promise;
                 };
             });
-
-
-            it('should reject blank names', function(){
+            it('validate good addresses', function(done){
+               validateAddress().then(function(isValid){
+                   expect(isValid).to.equal(true);
+                   done();
+               });
+                resolvePromises();
+            });
+            it('should reject blank names', function(done){
                 testAddress.name = '';
-                var test = validateAddress();
-                expect(test).to.eventually.be.rejected;
+                var test = validateAddress().catch(function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
+                resolvePromises();
             });
-            it('should reject blank Address 1 values', function(){
+            it('should reject blank Address 1 values', function(done){
                 testAddress.address1 = '';
-                var test = validateAddress();
-                expect(test).to.eventually.be.rejected;
+                var test = validateAddress().catch(function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
+                resolvePromises();
             });
-            it('should accept blank Address 2 values', function(){
+            it('should accept blank Address 2 values', function(done){
                 testAddress.address2 = '';
-                var test = validateAddress();
-                expect(test).to.eventually.equal(true);
+                var test = validateAddress().then(function(isValid){
+                    expect(isValid).to.equal(true);
+                    done();
+                });
+                resolvePromises();
             });
-            it('should reject blank City values', function(){
+            it('should reject blank City values', function(done){
                 testAddress.city = '';
-                var test = validateAddress();
-                expect(test).to.eventually.be.rejected;
+                var test = validateAddress().catch(function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
+                resolvePromises();
             });
-            it('should reject blank State values', function(){
+            it('should reject blank State values', function(done){
                 testAddress.state = '';
-                var test = validateAddress();
-                expect(test).to.eventually.be.rejected;
+                var test = validateAddress().catch(function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
+                resolvePromises();
             });
-            it('should reject blank Country values', function(){
+            it('should reject blank Country values', function(done){
                 testAddress.country = '';
-                var test = validateAddress();
-                expect(test).to.eventually.be.rejected;
+                var test = validateAddress().catch(function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
+                resolvePromises();
             });
-            it('should reject blank Zip/Postal Code values', function(){
+            it('should reject blank Zip/Postal Code values', function(done){
                 testAddress.zipPc= '';
-                var test = validateAddress();
-                expect(test).to.eventually.be.rejected;
+                var test = validateAddress().catch(function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
+                resolvePromises();
             });
-            it('should reject null', function(){
+            it('should reject null', function(done){
                 testAddress = null;
-                var test = validateAddress();
-                expect(test).to.eventually.be.rejected;
+                var test = validateAddress().catch(function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
+                resolvePromises();
             });
-            it('should reject undefined', function(){
+            it('should reject undefined', function(done){
                 testAddress = void 0;
-                var test = validateAddress();
-                expect(test).to.eventually.be.rejected;
+                validateAddress().catch(function(reason){
+                    reason.should.be.a('string');
+                    done();
+                });
+                resolvePromises();
             });
         });
 

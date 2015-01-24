@@ -28,6 +28,7 @@
     "chai": "^1.9.1",
     "chai-as-promised": "^4.1.1",
     "karma-chai-plugins": "~0.2.4",
-    "karma-coverage": "~0.2.7"
+    "karma-coverage": "~0.2.7",
+    "typescript": "~1.4.1"
   }
 }

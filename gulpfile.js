@@ -3,6 +3,7 @@ var karma = require('gulp-karma');
 
 var testFiles =[
 'bower_components/angular/angular.js',
+	'bower_components/angular-messages/angular-messages.js',
 'bower_components/angular-mocks/angular-mocks.js',
 'bower_components/lodash/lodash.min.js',
 'app/js/*.js',

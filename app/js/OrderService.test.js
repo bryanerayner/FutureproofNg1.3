@@ -1,6 +1,7 @@
 describe('OrderService', function(){
     var OrderService;
     var $rootScope;
+    var $timeout;
 
     var orderCart, orderCard, orderBilling, orderShipping;
 
@@ -10,7 +11,7 @@ describe('OrderService', function(){
         }
     };
 
-    beforeEach(module('futureStore'));
+    beforeEach(module('futureStore.orders'));
     beforeEach(function(){
 
         orderCard = {
@@ -55,9 +56,10 @@ describe('OrderService', function(){
             zipPc :'M3Q5T6'
         };
 
-        inject(['OrderService', '$rootScope', function(OrderSrv, rs){
+        inject(['OrderService', '$rootScope', '$timeout', function(OrderSrv, rs, timeout){
             OrderService = OrderSrv;
             $rootScope = rs;
+            $timeout = timeout;
         }]);
 
     });
@@ -79,7 +81,7 @@ describe('OrderService', function(){
 
             placeOrder = function(cart, card, billing, shipping){
                 var promise = OrderService.placeOrder(cart, card, billing, shipping);
-                resolvePromises();
+
                 return promise;
             }
         });
@@ -88,12 +90,53 @@ describe('OrderService', function(){
             _.uniqueId.restore();
         });
 
-        it('Should return a valid order confirmation for valid shipment requests', function(){
+        it('Should return a valid order confirmation for valid shipment requests', function(done){
             var order = placeOrder(orderCart, orderCard, orderBilling, orderShipping);
-            expect(order).to.eventually.become({
-                orderId:'uid',
-                trackingNumber:'uid'
+            order.then(function(value) {
+                value.should.deep.equal({
+                    orderId: 'uid',
+                    trackingNumber: 'uid'
+                });
+                done();
+            },function(reason){
+                assert().fail();
+                done();
             });
+            resolvePromises();
+        });
+
+        it('Should reject orders if the credit card is invalid', function(done){
+            orderCard.number = '';
+            placeOrder(orderCart, orderCard, orderBilling, orderShipping).then(function(){
+                assert().fail();
+                done();
+            }, function(rejection){
+                rejection.should.be.a('string');
+                done();
+            });
+            resolvePromises();
+        });
+        it('Should reject orders if the billing address is invalid', function(done){
+            orderBilling.state = '';
+            placeOrder(orderCart, orderCard, orderBilling, orderShipping).then(function(){
+                assert().fail();
+                done();
+            }, function(reason){
+                reason.should.be.a('string');
+                done();
+            });
+            resolvePromises();
+        });
+        it('Should reject orders if the shipping address is invalid', function(done){
+            orderShipping.state = '';
+            placeOrder(orderCart, orderCard, orderBilling, orderShipping).then(function(){
+                assert().fail();
+                done();
+            }, function(reason){
+                reason.should.be.a('string');
+                done();
+            });
+            resolvePromises();
         });
     });
 

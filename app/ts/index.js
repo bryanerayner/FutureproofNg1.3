@@ -101,6 +101,7 @@ var ShoppingCart = angular.module('futureStore', []).service('OrderService', ['$
         return $q.when(true);
     };
 }]).service('BankTeller', ['$q', function ($q) {
+    var sixteenDigits = /^[\d]{16}$/;
     /**
      * Validate the credit card number, ensuring that it is 16 digits.
      * @param cardNumber The Credit Card Number
@@ -109,7 +110,7 @@ var ShoppingCart = angular.module('futureStore', []).service('OrderService', ['$
         return $q(function (resolve, reject) {
             var ccNumber = cardNumber + '';
             ccNumber = ccNumber.replace(/[\-\s]*/gi, '');
-            if (ccNumber.length < 16) {
+            if (!sixteenDigits.test(ccNumber)) {
                 return reject('Card Number Invalid');
             }
             resolve(ccNumber);
@@ -124,7 +125,7 @@ var ShoppingCart = angular.module('futureStore', []).service('OrderService', ['$
     this.validateCcv = function (ccv) {
         return $q(function (resolve, reject) {
             var ccv = (ccv + '').trim();
-            if (!threeDigits.exec(ccv)) {
+            if (!threeDigits.test(ccv)) {
                 return reject('Invalid CCV');
             }
             resolve(ccv);
@@ -408,3 +409,4 @@ var ShoppingCart = angular.module('futureStore', []).service('OrderService', ['$
         }
     };
 });
+//# sourceMappingURL=index.js.map

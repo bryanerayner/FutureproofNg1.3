@@ -48,7 +48,7 @@
         </div>
         <div class="row">
             <div class="small-12 columns">
-                <shopping-cart cart-contents="ctrl.shoppingCart"></shopping-cart>
+                <shopping-cart cart-contents="storeCheckout.shoppingCart"></shopping-cart>
             </div>
         </div>
         <div class="row">
@@ -56,7 +56,7 @@
                 <h3>Payment & Shipping</h3>
             </div>
             <div class="small-12 columns">
-                <credit-card-entry ng-model="ctrl.creditCard"></credit-card-entry>
+                <credit-card-entry ng-model="storeCheckout.creditCard"></credit-card-entry>
             </div>
         </div>
         <div class="row">
@@ -64,7 +64,7 @@
                 <h4>Billing Address:</h4>
             </div>
             <div class="small-12 columns">
-                <address-entry ng-model="ctrl.billingAddress"></address-entry>
+                <address-entry ng-model="storeCheckout.billingAddress"></address-entry>
             </div>
         </div>
         <div class="row">
@@ -72,16 +72,18 @@
                 <h4>Shipping Address:</h4>
             </div>
             <div class="small-12 columns">
-                <input type="checkbox" id = "{{ctrl.id + 'billingIsShipping'}}" ng-model="ctrl.shippingIsBilling"/>
-                <label for="{{ctrl.id + 'billingIsShipping'}}">Ship To Billing Address</label>
+                <input type="checkbox"
+                       id = "{{storeCheckout.id + 'billingIsShipping'}}"
+                       ng-model="storeCheckout.shippingIsBilling"/>
+                <label for="{{storeCheckout.id + 'billingIsShipping'}}">Ship To Billing Address</label>
             </div>
-            <div class="small-12 columns" ng-show="!ctrl.shippingIsBilling">
-                <address-entry ng-model="ctrl.shippingAddress"></address-entry>
+            <div class="small-12 columns" ng-show="!storeCheckout.shippingIsBilling">
+                <address-entry ng-model="storeCheckout.shippingAddress"></address-entry>
             </div>
         </div>
         <div class="row">
             <div class="small-12 columns">
-                <button class="button right" ng-click="ctrl.checkout()">Submit Order</button>
+                <button class="button right" ng-click="storeCheckout.checkout()">Submit Order</button>
             </div>
         </div>
     </div>
@@ -239,12 +241,13 @@
 </script>
 <script type="text/ng-template" id="address-entry-template.html">
     <div class="address-entry panel">
-    <div ng-form="ctrl.addressForm">
+    <div ng-form="addressForm">
         <div class="row">
             <div class="small-12 columns">
                 <label for="addressName">Name:</label>
                 <input id="addressName"
                        type="text"
+                       name="name"
                        ng-model="ctrl.name"
                        ng-required="true"
                        ng-minlength="1" />
@@ -255,6 +258,7 @@
                 <label for="address1">Address Line 1:</label>
                 <input id="address1"
                        type="text"
+                       name="address1"
                        ng-model="ctrl.address1"
                        ng-required="true"
                        ng-minlength="1" />
@@ -265,6 +269,7 @@
                 <label for="address2">Address Line 2:</label>
                 <input id="address2"
                        type="text"
+                       name="address2"
                        ng-model="ctrl.address2"/>
             </div>
         </div>
@@ -273,6 +278,7 @@
                 <label for="city">City:</label>
                 <input id="city"
                        type="text"
+                       name="city"
                        ng-model="ctrl.city"
                        ng-required="true"
                        ng-minlength="1"
@@ -282,6 +288,7 @@
                 <label for="state">State:</label>
                 <input id="state"
                        type="text"
+                       name="state"
                        ng-model="ctrl.state"
                        ng-required="true"
                        ng-minlength="2"
@@ -293,6 +300,7 @@
                 <label for="country">Country:</label>
                 <input id="country"
                        type="text"
+                       name="country"
                        ng-model="ctrl.country"
                        ng-required="true"
                        ng-minlength="3"
@@ -302,6 +310,7 @@
                 <label for="zipPc">Zip / Postal Code:</label>
                 <input id="zipPc"
                        type="text"
+                       name="zipPc"
                        ng-model="ctrl.zipPc"
                        ng-required="true"
                        ng-minlength="5"

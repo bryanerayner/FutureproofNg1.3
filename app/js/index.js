@@ -262,7 +262,7 @@ angular.module('futureStore.orders', ['ngMessages'])
             }
         };
     })
-    .controller('AddressEntryController', ['PostOffice', function(PostOffice){
+    .controller('AddressEntryController', ['PostOffice', '$scope', function(PostOffice, $scope){
         var ngModelCtrl = null;
         var _this = this;
         this.id= _.uniqueId('addressEntry');
@@ -309,11 +309,13 @@ angular.module('futureStore.orders', ['ngMessages'])
         };
 
         $scope.$watchGroup([
-                function () { return _this.number;},
-                function () { return _this.cardholderName;},
-                function () { return _this.ccv;},
-                function () { return _this.expiryMonth;},
-                function () { return _this.expiryYear;}],
+                function () { return _this.name;},
+                function () { return _this.address1;},
+                function () { return _this.address2;},
+                function () { return _this.city;},
+                function () { return _this.state;},
+                function () { return _this.country;},
+                function () { return _this.zipPc;}],
             function(){
                 _this.pushToModel();
             });
@@ -338,7 +340,7 @@ angular.module('futureStore.orders', ['ngMessages'])
 
 
 angular.module('futureStore.cart', [])
-    .service('ShoppingCart', ['$q', '$timeout', '$document', function($q, $timeout, $document){
+    .service('CartService', ['$q', '$timeout', '$document', function($q, $timeout, $document){
         var _this = this;
         var loadedCartData = false;
         var taxRate = 0.13;
@@ -406,7 +408,7 @@ angular.module('futureStore.cart', [])
 
         return this;
     }])
-    .controller('ShoppingCartController', ['ShoppingCart', function(ShoppingCartService){
+    .controller('ShoppingCartController', ['CartService', function(CartService){
         this.cartContents = this.cartContents || [];
 
         this.deleteProduct = function (productData) {
@@ -414,11 +416,11 @@ angular.module('futureStore.cart', [])
         };
 
         this.getCartSubTotal = function(){
-            return ShoppingCartService.getCartTotal(this.cartContents);
+            return CartService.getCartTotal(this.cartContents);
         };
 
         this.getCartTaxes = function(){
-            return ShoppingCartService.getTaxes(this.getCartSubTotal());
+            return CartService.getTaxes(this.getCartSubTotal());
         };
 
         this.getTotalPrice = function(){
@@ -510,7 +512,7 @@ angular.module('futureStore.cart', [])
     });
 
 angular.module('futureStore.checkout', ['futureStore.orders', 'futureStore.cart'])
-    .controller('StoreCheckoutController', ['ShoppingCart', 'OrderService', '$window', function(ShoppingCart, OrderService, $window){
+    .controller('StoreCheckoutController', ['CartService', 'OrderService', '$window', function(CartService, OrderService, $window){
         var _this = this;
         this.id = _.uniqueId('storeCheckout');
 
@@ -523,7 +525,7 @@ angular.module('futureStore.checkout', ['futureStore.orders', 'futureStore.cart'
         };
 
         this.getCart = function(){
-            ShoppingCart.getCartData().then(function(cartData){
+            CartService.getCartData().then(function(cartData){
                 _this.shoppingCart = cartData;
             });
         };
@@ -531,8 +533,11 @@ angular.module('futureStore.checkout', ['futureStore.orders', 'futureStore.cart'
         this.checkout = function() {
 
             var successfulCheckout = function (orderConfirmation) {
-                ShoppingCart.setCartContents([]);
-                $window.alert('Placed your order. Order Number: ' + orderConfirmation.orderId + ' Tracking Number: ' + orderConfirmation.trackingNumber);
+                CartService.setCartContents([]);
+                $window.alert(  'Placed your order. Order Number: ' + 
+                                orderConfirmation.orderId + 
+                                ' Tracking Number: ' + 
+                                orderConfirmation.trackingNumber);
             };
 
             var failedCheckout = function (failedReason) {
@@ -558,7 +563,7 @@ angular.module('futureStore.checkout', ['futureStore.orders', 'futureStore.cart'
         return {
             restrict:'E',
             replace:true,
-            controller:'StoreCheckoutController as ctrl',
+            controller:'StoreCheckoutController as storeCheckout',
             templateUrl:'store-checkout-template.html'
         }
     })

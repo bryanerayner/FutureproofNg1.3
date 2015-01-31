@@ -109,4 +109,84 @@ And that's all there is!
 
 ## The Cart Module
 
-Now we're ready to start our refactoring our first Angular module into Typescript! Following AMD module recommendations, we'll make a file for each of our classes.
+Now we're ready to start our refactoring our first Angular module into Typescript! Until this point, we've had all our code in a single file. For the rest of this tutorial, we'll try to stick to one file per component, and import any dependencies at that point. We'll make an exception for directives which act as custom elements. All the directives in our example use a controller, and since their controllers are only designed to be used by their associated directive, we'll keep them in one file.
+
+Let's add the files for our Cart module:
+
+	touch cart/CartService.ts
+	touch cart/shopping-cart.ts
+	touch cart/cart-item.ts
+
+
+### The Angular Module
+
+_module.ts contains the definition of the 'futureStore.cart' Angular module. Each of the other files will reference _module.ts, and invoke the appropriate calls .service, .controller, etc.
+
+For consistency, and to provide a differentation from the Typescript / ES6 module keyword, we'll export the Angular module as ngModule.
+
+	// _module.ts
+	export ngModule = angular.module('futureStore.cart', []);
+
+After compiling with gulp task, take a look at the compiled Javascript:
+
+	// _module.js
+	define(["require", "exports"], function (require, exports) {
+	    exports.ngModule = angular.module('futureStore.cart', []);
+	});
+
+This uses the standard AMD syntax for defining a module. You can read more about it here: https://github.com/jrburke/requirejs/wiki/Differences-between-the-simplified-CommonJS-wrapper-and-standard-AMD-define#exports
+
+
+
+## Our First Service and Dependency Injection
+
+Next, we'll begin transpiling our first service. We'll introduce another way to define dependency injection in Angular, and show how the ES6 class keyword works with the concept of Angular services.
+
+First, we'll extract the CartService code from the Javascript and paste it into CartService.ts
+
+	angular.module('futureStore.cart').service('CartService', ['$q', '$timeout', '$document', function($q, $timeout, $document){
+		// Service factory function body
+
+		var taxRate = 0.13; // Private variable taxRate
+
+		// Public function - loadCartData()
+		this.loadCartData = function () {/* ... */};
+    }]);
+
+If you've written an Angular service before, you're likely already following patterns related to accesibility. Variables which are defined in the body of the function are private. Variables which are attached to the function using the 'this' keyword (for example, ths.loadCartData) are public. Some authors of Angular services choose to expose the service in the following fashion:
+	
+	
+	module.service('SomeService', function(){
+		// This is kept private
+		var theAnswer = 42;
+
+		var loadCartData = function() {/** ... */}
+
+		var theOtherFunction = function() {/** ... */}
+		
+		// loadCartData and theOtherFunction are exposed to service consumers
+		return {
+			loadCartData: loadCartData,
+			otherPublicFunction: theOtherFunction
+		};
+	});
+
+In each circumstance, there's a separation between public and private methods and properties. Typescript takes this information and makes it explicit:
+
+	// Declare a class with an empty constructor function
+	class SomeService
+	{
+		// Mark 'theAnswer' as private, and initialize it to a default value.
+		// Privacy is enforced by the TypeScript compiler.
+		private theAnswer = 42;
+		
+		// loadCartData ends up on the prototype, and isn't restricted by
+		// the compiler.
+		loadCartData(){/* ... */}
+		
+		// theOtherFunction also ends up on the prototype.
+		theOtherFunction(){/* ... */}
+	}
+	// Angular is injected with a service called SomeService.
+	module.service('SomeService', SomeService);
+

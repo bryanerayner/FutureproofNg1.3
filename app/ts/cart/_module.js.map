@@ -1,1 +1,1 @@
-{"version":3,"file":"_module.js","sourceRoot":"","sources":["../../app/ts/cart/_module.ts"],"names":[],"mappings":"AAAA,gDAAgD;;IAEhD,IAAI,OAAO,GAAG,EAAE,CAAC;IAOjB,IAAI,GAAG,GAAG,EAAE,CAAC;IAMb,IAAI,UAAU,GAAG,EAAE,CAAC;IATpB,OAAS,OAAO,CAAC"}
+{"version":3,"file":"_module.js","sourceRoot":"","sources":["../../app/ts/cart/_module.ts"],"names":[],"mappings":"AAAA,gDAAgD;;IAErC,gBAAQ,GAAG,OAAO,CAAC,MAAM,CAAC,kBAAkB,EAAE,EAAE,CAAC,CAAC"}

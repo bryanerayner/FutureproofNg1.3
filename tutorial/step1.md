@@ -6,7 +6,7 @@ be treating this (as much as possible) like a real-world application. Here's the
  - It must integrate with a REST-ful API to synchronize the contents of the user's cart.
  - It must allow the user to modify the contents of their cart before they submit the order.
  - It must validate all input before checkout.
- - After placing a successful order, it should direct the user towards their next steps.
+ - After placing a successful order, it should provide the user with their order confirmation and a tracking number.
 
 We'll break down the structure of the application into its various services, controllers, and directives. Then, we'll
 walk through the implementation of each component. You'll find the source in one Javascript file in this tutorial's repository.
@@ -30,7 +30,7 @@ This leaves us with four services:
 ### OrderService
 A service which can take payment information and an inventory, and place an order with the API.
 
-### ShoppingCart
+### CartService
 A single source of truth for the contents of the shopping cart. This tracks and updates the contents of the user's
 cart throughout their visit to the store. It also provides controllers with a calculation of the cart's cost.
 
@@ -51,9 +51,9 @@ of the work each of these may entail.
     // A real world application would be tied to an API via $http or $resource.
 
 
-#### ShoppingCart
+#### CartService
 
-    // The shopping cart in this example uses a script tag to load the cart data. In a real world
+    // The cart service in this example uses a script tag to load the cart data. In a real world
     // application, this would be handled by $http or $resource.
 
 #### BankTeller
@@ -104,8 +104,10 @@ ever elegant
     // Similar to CreditCardEntryController, this directive works with ng-model to interact with an Address data type.
 
 
+## Implementation
+
+The scope of this tutorial covers conversion of existing Angular development, to a Typescript tool chain. The source code for the example can be found in the associated repository, in the app/js folder. We'll be referring to sections throughout section two.
 
 ## Preparation for Step 2
 
-There we have it - A working Angular application that is likely on par with what you'll find after just a few weeks developing
-any real world application. Now, we'll go through the (relatively) painless task of converting to Typescript.
+We've got ourselves a working Angular application which covers a few moving parts and different data types. Next, we'll go through the task of converting to Typescript. Along the way, we'll be covering some new ground with the ES6 class keyword, modules, and the Typescript compiler.

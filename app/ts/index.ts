@@ -58,7 +58,7 @@ var ShoppingCart = angular.module('futureStore', [])
          * @param cart The shopping cart to calculate the cost of.
          */
         this.getCartTotal = function(cart){
-            return _.reduce(cart, function(sum, item){
+            return <number>_.reduce(cart, function(sum, item:{price:number; count:number;}){
                 return sum + (item.price * item.count);
             }, 0);
         };

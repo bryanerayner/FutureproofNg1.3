@@ -2,16 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8fd49fa-9421-493b-aae0-10cac8354b16" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/cart/_module.js.map" afterPath="$PROJECT_DIR$/app/ts/cart/_module.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/cart/_module.js" afterPath="$PROJECT_DIR$/app/ts/cart/_module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/cart/_module.ts" afterPath="$PROJECT_DIR$/app/ts/cart/_module.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/index.js.map" afterPath="$PROJECT_DIR$/app/ts/index.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/index.js" afterPath="$PROJECT_DIR$/app/js/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/index.ts" afterPath="$PROJECT_DIR$/app/ts/index.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/jsStorefront.html" afterPath="$PROJECT_DIR$/app/views/jsStorefront.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tutorial/step1.md" afterPath="$PROJECT_DIR$/tutorial/step1.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/cart/CartService.js.map" afterPath="$PROJECT_DIR$/app/ts/cart/CartService.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/cart/CartService.js" afterPath="$PROJECT_DIR$/app/ts/cart/CartService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/cart/CartService.ts" afterPath="$PROJECT_DIR$/app/ts/cart/CartService.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/cart/_index.ts" afterPath="$PROJECT_DIR$/app/ts/cart/_index.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/checkout/_module.ts" afterPath="$PROJECT_DIR$/app/ts/checkout/_module.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/cart/cart-item.ts" afterPath="$PROJECT_DIR$/app/ts/cart/cart-item.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/futureStore.js.map" afterPath="$PROJECT_DIR$/app/ts/futureStore.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/futureStore.js" afterPath="$PROJECT_DIR$/app/ts/futureStore.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/futureStore.ts" afterPath="$PROJECT_DIR$/app/ts/futureStore.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/ts/cart/shopping-cart.ts" afterPath="$PROJECT_DIR$/app/ts/cart/shopping-cart.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tutorial/step3.md" afterPath="$PROJECT_DIR$/tutorial/step3.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/styles/storefront.css" afterPath="$PROJECT_DIR$/styles/storefront.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="FutureproofNg1.3.iws" />
@@ -38,68 +39,18 @@
     <splitter split-orientation="horizontal" split-proportion="0.48950037">
       <split-first>
         <leaf>
-          <file leaf-file-name="CartService.ts" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/ts/cart/CartService.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="index.ts" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/ts/index.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="7260">
-                  <caret line="60" column="92" selection-start-line="60" selection-start-column="92" selection-end-line="60" selection-end-column="92" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="_module.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/ts/cart/_module.ts">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
-                  <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+                  <caret line="1" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="61" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="_index.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/ts/cart/_index.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="_module.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/app/ts/cart/_module.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.063025214" vertical-offset="0" max-vertical-offset="952">
-                  <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="_index.ts" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/ts/cart/_index.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="cart-item.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/ts/cart/cart-item.js">
+          <file leaf-file-name="_module.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/ts/checkout/_module.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
                   <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -111,18 +62,8 @@
           <file leaf-file-name="cart-item.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/ts/cart/cart-item.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="tsd.d.ts" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/typings/tsd.d.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="135">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1305">
+                  <caret line="61" column="1" selection-start-line="61" selection-start-column="1" selection-end-line="61" selection-end-column="1" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                   </folding>
@@ -130,11 +71,75 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="angular.d.ts" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/typings/angularjs/angular.d.ts">
+          <file leaf-file-name="shopping-cart.ts" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/ts/cart/shopping-cart.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="23115">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.60570073" vertical-offset="0" max-vertical-offset="842">
+                  <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+                  <folding>
+                    <element signature="n#!!doc" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="store-checkout.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/ts/checkout/store-checkout.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
+                  <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+                  <folding>
+                    <element signature="n#!!doc" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="address-entry.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/ts/orders/address-entry.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
+                  <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="BankTeller.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/ts/orders/BankTeller.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
+                  <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="credit-card-entry.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/ts/orders/credit-card-entry.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
+                  <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="OrderService.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/ts/orders/OrderService.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
+                  <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="PostOffice.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/ts/orders/PostOffice.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
+                  <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                   </folding>
@@ -146,10 +151,20 @@
       </split-first>
       <split-second>
         <leaf>
+          <file leaf-file-name="CartService.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/ts/cart/CartService.ts">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1320">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="36" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/package.json">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="630">
+                <state vertical-scroll-proportion="-0.0" vertical-offset="480" max-vertical-offset="630">
                   <caret line="32" column="21" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
                   <folding />
                 </state>
@@ -159,8 +174,8 @@
           <file leaf-file-name="_module.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/ts/checkout/_module.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
+                  <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -176,24 +191,46 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/js/index.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.38836104" vertical-offset="3" max-vertical-offset="1335">
+                  <caret line="410" column="0" selection-start-line="410" selection-start-column="0" selection-end-line="444" selection-end-column="6" />
+                  <folding>
+                    <element signature="e#0#47#0" expanded="false" />
+                    <element signature="e#337#996#0" expanded="false" />
+                    <element signature="e#1045#2005#0" expanded="false" />
+                    <element signature="e#2054#5271#0" expanded="false" />
+                    <element signature="e#5372#8055#0" expanded="false" />
+                    <element signature="e#8104#8645#0" expanded="false" />
+                    <element signature="e#8742#10692#0" expanded="false" />
+                    <element signature="e#10738#11263#0" expanded="false" />
+                    <element signature="e#11400#13330#0" expanded="false" />
+                    <element signature="e#13412#14062#0" expanded="false" />
+                    <element signature="e#14106#14407#0" expanded="false" />
+                    <element signature="e#14476#15840#0" expanded="false" />
+                    <element signature="e#15880#16443#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="futureStore.ts" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/ts/futureStore.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="120">
-                  <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="jquery.d.ts" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/typings/jquery/jquery.d.ts">
+          <file leaf-file-name="_index.ts" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/ts/cart/_index.ts">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.40966386" vertical-offset="3765" max-vertical-offset="47850">
-                  <caret line="277" column="7" selection-start-line="277" selection-start-column="7" selection-end-line="277" selection-end-column="7" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="true" />
-                  </folding>
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
+                  <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -223,12 +260,23 @@
         <option value="$PROJECT_DIR$/app/js/BankTeller.test.js" />
         <option value="$PROJECT_DIR$/gulpfile.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/app/ts/futureStore.ts" />
         <option value="$PROJECT_DIR$/styles/storefront.css" />
         <option value="$PROJECT_DIR$/app/js/index.js" />
         <option value="$PROJECT_DIR$/app/views/jsStorefront.html" />
-        <option value="$PROJECT_DIR$/app/ts/cart/_module.ts" />
         <option value="$PROJECT_DIR$/app/ts/index.ts" />
+        <option value="$PROJECT_DIR$/app/ts/futureStore.ts" />
+        <option value="$PROJECT_DIR$/app/ts/cart/_module.ts" />
+        <option value="$PROJECT_DIR$/app/ts/cart/CartService.ts" />
+        <option value="$PROJECT_DIR$/app/ts/checkout/store-checkout.ts" />
+        <option value="$PROJECT_DIR$/app/ts/orders/address-entry.ts" />
+        <option value="$PROJECT_DIR$/app/ts/orders/BankTeller.ts" />
+        <option value="$PROJECT_DIR$/app/ts/orders/credit-card-entry.ts" />
+        <option value="$PROJECT_DIR$/app/ts/orders/OrderService.ts" />
+        <option value="$PROJECT_DIR$/app/ts/orders/PostOffice.ts" />
+        <option value="$PROJECT_DIR$/app/ts/checkout/_module.ts" />
+        <option value="$PROJECT_DIR$/app/ts/cart/_index.ts" />
+        <option value="$PROJECT_DIR$/app/ts/cart/cart-item.ts" />
+        <option value="$PROJECT_DIR$/app/ts/cart/shopping-cart.ts" />
       </list>
     </option>
   </component>
@@ -236,8 +284,10 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="-1" />
+    <option name="y" value="23" />
     <option name="width" value="1680" />
-    <option name="height" value="1050" />
+    <option name="height" value="953" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -502,7 +552,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="FullScreen" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="options.lastSelected" value="configurable.group.appearance" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -518,10 +568,14 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <method />
     </configuration>
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -529,10 +583,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -571,7 +621,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <frame x="-1" y="23" width="1680" height="953" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -587,11 +637,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -609,9 +659,9 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16757083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -635,60 +685,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/bower.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="450">
-          <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/StoreCheckoutController.test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="3510">
-          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/jsStorefront.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="999" max-vertical-offset="3045">
-          <caret line="81" column="43" selection-start-line="81" selection-start-column="43" selection-end-line="81" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5769" max-vertical-offset="6225">
-          <caret line="356" column="0" selection-start-line="356" selection-start-column="0" selection-end-line="356" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#47#0" expanded="false" />
-            <element signature="e#337#996#0" expanded="false" />
-            <element signature="e#1045#2005#0" expanded="false" />
-            <element signature="e#2054#5271#0" expanded="false" />
-            <element signature="e#13412#14062#0" expanded="false" />
-            <element signature="e#14106#14407#0" expanded="false" />
-            <element signature="e#14476#15840#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/styles/storefront.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/jsStorefront.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2293" max-vertical-offset="4470">
@@ -706,33 +702,15 @@
             <element signature="e#337#996#0" expanded="false" />
             <element signature="e#1045#2005#0" expanded="false" />
             <element signature="e#2054#5271#0" expanded="false" />
+            <element signature="e#5372#8055#0" expanded="false" />
+            <element signature="e#8104#8645#0" expanded="false" />
+            <element signature="e#8742#10692#0" expanded="false" />
+            <element signature="e#10738#11263#0" expanded="false" />
+            <element signature="e#11400#13330#0" expanded="false" />
             <element signature="e#13412#14062#0" expanded="false" />
             <element signature="e#14106#14407#0" expanded="false" />
             <element signature="e#14476#15840#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/jsStorefront.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2293" max-vertical-offset="4470">
-          <caret line="161" column="31" selection-start-line="161" selection-start-column="31" selection-end-line="161" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2634" max-vertical-offset="6225">
-          <caret line="193" column="67" selection-start-line="193" selection-start-column="67" selection-end-line="193" selection-end-column="67" />
-          <folding>
-            <element signature="e#0#47#0" expanded="false" />
-            <element signature="e#337#996#0" expanded="false" />
-            <element signature="e#1045#2005#0" expanded="false" />
-            <element signature="e#2054#5271#0" expanded="false" />
-            <element signature="e#13412#14062#0" expanded="false" />
-            <element signature="e#14106#14407#0" expanded="false" />
-            <element signature="e#14476#15840#0" expanded="false" />
+            <element signature="e#15880#16443#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -754,9 +732,15 @@
             <element signature="e#337#996#0" expanded="false" />
             <element signature="e#1045#2005#0" expanded="false" />
             <element signature="e#2054#5271#0" expanded="false" />
+            <element signature="e#5372#8055#0" expanded="false" />
+            <element signature="e#8104#8645#0" expanded="false" />
+            <element signature="e#8742#10692#0" expanded="false" />
+            <element signature="e#10738#11263#0" expanded="false" />
+            <element signature="e#11400#13330#0" expanded="false" />
             <element signature="e#13412#14062#0" expanded="false" />
             <element signature="e#14106#14407#0" expanded="false" />
             <element signature="e#14476#15840#0" expanded="false" />
+            <element signature="e#15880#16443#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -778,9 +762,15 @@
             <element signature="e#337#996#0" expanded="false" />
             <element signature="e#1045#2005#0" expanded="false" />
             <element signature="e#2054#5271#0" expanded="false" />
+            <element signature="e#5372#8055#0" expanded="false" />
+            <element signature="e#8104#8645#0" expanded="false" />
+            <element signature="e#8742#10692#0" expanded="false" />
+            <element signature="e#10738#11263#0" expanded="false" />
+            <element signature="e#11400#13330#0" expanded="false" />
             <element signature="e#13412#14062#0" expanded="false" />
             <element signature="e#14106#14407#0" expanded="false" />
             <element signature="e#14476#15840#0" expanded="false" />
+            <element signature="e#15880#16443#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -802,9 +792,15 @@
             <element signature="e#337#996#0" expanded="false" />
             <element signature="e#1045#2005#0" expanded="false" />
             <element signature="e#2054#5271#0" expanded="false" />
+            <element signature="e#5372#8055#0" expanded="false" />
+            <element signature="e#8104#8645#0" expanded="false" />
+            <element signature="e#8742#10692#0" expanded="false" />
+            <element signature="e#10738#11263#0" expanded="false" />
+            <element signature="e#11400#13330#0" expanded="false" />
             <element signature="e#13412#14062#0" expanded="false" />
             <element signature="e#14106#14407#0" expanded="false" />
             <element signature="e#14476#15840#0" expanded="false" />
+            <element signature="e#15880#16443#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -884,31 +880,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1515" max-vertical-offset="1605">
           <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/checkout/_module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="954">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/orders/_module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="954">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/futureStore.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="120">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -929,31 +900,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/ts/cart/_module.js.map">
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="911">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/typings/jquery/jquery.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40966386" vertical-offset="3765" max-vertical-offset="47850">
-          <caret line="277" column="7" selection-start-line="277" selection-start-column="7" selection-end-line="277" selection-end-column="7" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/js/BankTeller.test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2558" max-vertical-offset="3510">
           <caret line="142" column="45" selection-start-line="142" selection-start-column="45" selection-end-line="142" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -961,7 +920,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
           <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -977,7 +935,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="683" max-vertical-offset="2070">
           <caret line="76" column="51" selection-start-line="76" selection-start-column="51" selection-end-line="76" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -985,7 +942,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1283" max-vertical-offset="2235">
           <caret line="133" column="23" selection-start-line="133" selection-start-column="23" selection-end-line="133" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -997,36 +953,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4016" max-vertical-offset="5100">
-          <caret line="547" column="104" selection-start-line="547" selection-start-column="89" selection-end-line="547" selection-end-column="104" />
-          <folding>
-            <element signature="e#0#47#0" expanded="false" />
-            <element signature="e#337#996#0" expanded="false" />
-            <element signature="e#1045#2005#0" expanded="false" />
-            <element signature="e#2054#5271#0" expanded="false" />
-            <element signature="e#13412#14062#0" expanded="false" />
-            <element signature="e#14106#14407#0" expanded="false" />
-            <element signature="e#14476#15840#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/cart/CartService.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/typings/tsd.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1049,22 +981,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/cart/_index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/cart/_index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/ts/cart/cart-item.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
@@ -1073,7 +989,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/cart/cart-item.ts">
+    <entry file="file://$PROJECT_DIR$/typings/jquery/jquery.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10688836" vertical-offset="3900" max-vertical-offset="47850">
+          <caret line="266" column="1" selection-start-line="266" selection-start-column="1" selection-end-line="266" selection-end-column="1" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/cart/_module.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="150">
+          <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/futureStore.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="855">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/cart/_index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1081,19 +1023,145 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/cart/_module.ts">
+    <entry file="file://$PROJECT_DIR$/app/ts/checkout/store-checkout.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
-          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+          <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/orders/address-entry.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
+          <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/ts/cart/_module.js">
+    <entry file="file://$PROJECT_DIR$/app/ts/orders/BankTeller.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.063025214" vertical-offset="0" max-vertical-offset="952">
-          <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
+          <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/orders/credit-card-entry.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
+          <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/orders/OrderService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
+          <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/orders/PostOffice.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
+          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/cart/_module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
+          <caret line="1" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/orders/_module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="954">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/checkout/_module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/checkout/_module.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="855">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/cart/CartService.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1335">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/cart/_index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/cart/cart-item.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1305">
+          <caret line="61" column="1" selection-start-line="61" selection-start-column="1" selection-end-line="61" selection-end-column="1" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38836104" vertical-offset="3" max-vertical-offset="1335">
+          <caret line="410" column="0" selection-start-line="410" selection-start-column="0" selection-end-line="444" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#47#0" expanded="false" />
+            <element signature="e#337#996#0" expanded="false" />
+            <element signature="e#1045#2005#0" expanded="false" />
+            <element signature="e#2054#5271#0" expanded="false" />
+            <element signature="e#5372#8055#0" expanded="false" />
+            <element signature="e#8104#8645#0" expanded="false" />
+            <element signature="e#8742#10692#0" expanded="false" />
+            <element signature="e#10738#11263#0" expanded="false" />
+            <element signature="e#11400#13330#0" expanded="false" />
+            <element signature="e#13412#14062#0" expanded="false" />
+            <element signature="e#14106#14407#0" expanded="false" />
+            <element signature="e#14476#15840#0" expanded="false" />
+            <element signature="e#15880#16443#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ts/cart/shopping-cart.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.60570073" vertical-offset="0" max-vertical-offset="842">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

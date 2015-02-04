@@ -190,3 +190,47 @@ In each circumstance, there's a separation between public and private methods an
 	// Angular is injected with a service called SomeService.
 	module.service('SomeService', SomeService);
 
+More information can be found on TypeScript classes at:
+	http://www.typescriptlang.org/Handbook#classes
+
+## ES6 classes and dependency injection
+
+You may be wondering, 'How do I do dependency injection with Typescript'? Angular defines three methods for defining dependency injection:
+
+	- Using an inline array.
+		Example: 
+		module.service('NeedyService', ['$http', function($http){
+
+			}]);
+
+	- Using the naming of function variables
+		Example:
+		module.service('NeedyService', function($http){
+
+			});
+
+	- Using a public property $inject
+		Example:
+
+		function NeedyService($http){
+
+		};
+		NeedyService.$inject = ['$http'];
+		module.service('NeedyService', NeedyService);
+
+For Typescript and ES6 classes, we'll use the third method. Typescript provides the *static* keyword, allowing properties and method to be defined on the class constructor function itself, rather than on the prototype.
+
+	// Typescript Needy Service
+
+	class NeedyService
+	{
+		static $inject = ['$http'];
+
+		$http;
+
+		constructor($http){
+			this.$http = $http;
+		}
+	}
+	module.service('NeedyService', NeedyService);
+

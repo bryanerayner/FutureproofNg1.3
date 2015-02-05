@@ -4,3 +4,5 @@ import _module = require('_module');
 import cartItem = require('cart-item');
 import cartService = require('CartService');
 import shoppingCart = require('shopping-cart');
+
+export var _module;

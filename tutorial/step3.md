@@ -234,3 +234,36 @@ For Typescript and ES6 classes, we'll use the third method. Typescript provides 
 	}
 	module.service('NeedyService', NeedyService);
 
+## Bringing it all together
+
+Now that we've seen a few examples, let's refactor the CartService to use AMD modules, and Typescript classes. The full file can be reviewed in the included repository, in app/ts/cart/CartService.ts
+
+	// CartService.ts
+	import _module = require('_module');
+
+	export class CartService
+	{
+	    static $inject = ['$q', '$timeout', '$document'];
+	    
+	    static $q;
+	    static $timeout;
+	    static $document;
+	    
+	    constructor($q, $timeout, $document){
+	        CartService.$q = $q;
+	        CartService.$timeout = $timeout;
+	        CartService.$document = $document;
+
+	        /* Rest of initialization */
+	    }
+
+	    /* Method definitions */
+	}
+	_module.ngModule.service('CartService', CartService);
+
+Typescript uses immediately invoked functions to define classes. While we could have injected $q, $timeout, and $document into the service as instance variables (using *this*), instead, we've injected them onto CartService. This has an advantage of increasing minification when the code moves into production.
+
+## Transpilation
+
+The similarity between Typescript and Javascript affords a huge benefit when transpiling code between the two languages. If you're proficient with a text editor which supports multiple carets (think Sublime Text), you can convert the entirety of index.js to this new format in under an hour.
+

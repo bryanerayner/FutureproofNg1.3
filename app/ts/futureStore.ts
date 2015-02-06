@@ -1,3 +1,9 @@
 import checkout = require('checkout/_index');
+import orders = require('orders/_index');
+import cart = require('cart/_index');
 
-export var _module = checkout._module;
+export var futureStore = {
+    checkout:checkout.checkout,
+    orders: orders.orders,
+    cart: cart.cart
+};

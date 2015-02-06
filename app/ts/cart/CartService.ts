@@ -58,7 +58,7 @@ export class CartService {
      * @param cart The shopping cart to calculate the cost of.
      */
     getCartTotal(cart) {
-        return _.reduce(cart, function (sum, item) {
+        return _.reduce(cart, function (sum:any, item:any) {
             return sum + (item.price * item.count);
         }, 0);
     }

@@ -261,9 +261,51 @@ Now that we've seen a few examples, let's refactor the CartService to use AMD mo
 	}
 	_module.ngModule.service('CartService', CartService);
 
-Typescript uses immediately invoked functions to define classes. While we could have injected $q, $timeout, and $document into the service as instance variables (using *this*), instead, we've injected them onto CartService. This has an advantage of increasing minification when the code moves into production.
+Typescript uses immediately invoked functions to define classes. While we could have injected $q, $timeout, and $document into the service as instance variables (using *this*), instead, we've injected them onto CartService (the class itself). This has an advantage of increasing minification when the code moves into production.
 
 ## Transpilation
 
 The similarity between Typescript and Javascript affords a huge benefit when transpiling code between the two languages. If you're proficient with a text editor which supports multiple carets (think Sublime Text), you can convert the entirety of index.js to this new format in under an hour.
 
+Using Typescript and the AMD module syntax can improve the structure of a large Angular application. Here's how I've gone about organizing the code in this tutorial, and some of the conventions I've taken for real world projects:
+
+### _index.ts
+
+The _index files, as mentioned, import each other file in the folder. These are then exported as one object which we'll name in accordance with the module it represents.
+
+	// cart/_index.ts
+
+	///<reference path="../../../typings/tsd.d.ts"/>
+
+	import _module = require('_module');
+	import cartItem = require('cart-item');
+	import cartService = require('CartService');
+	import shoppingCart = require('shopping-cart');
+
+	export var cart = {
+	    ngModule:_module.ngModule,
+	    CartItemController: cartItem.CartItemController,
+	    CartService:cartService.CartService,
+	    ShoppingCartController: shoppingCart.ShoppingCartController
+	};
+
+By referencing all required code in one file, other modules which are dependant on the cart module can import the code in one line. Here's an example of this practice from another _module file, checkout.
+
+	// checkout/_module.ts
+
+	///<reference path="../../../typings/tsd.d.ts"/>
+
+	import orders = require('../orders/_index');
+	import cart = require('../cart/_index');
+
+	export var ngModule = angular.module('futureStore.checkout', [
+	        'futureStore.orders',
+	        'futureStore.cart']);
+
+Here, we see the 'futureStore.checkout' module being defined, but not before the dependencies, the orders, and cart module, have been imported.
+
+### CartService.ts
+
+
+
+If you've taken the time to look at the repository

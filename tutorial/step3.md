@@ -5,15 +5,17 @@ just Typescript for its own sake (though I believe that would be compelling enou
 this project is alignment with the AtScript / Es6 syntax. In order to make our efforts worthwhile, we need to make sure we write code that will mesh well with that framework. 
 
 Angular 2.0 is committed to the following:
-	- Use of ES6 modules, instead of pure Angular modules.
-	- Use of the ES6 class syntax
-	- Type checking system during development to validate input
-	- Type annotations to power dependency injection
+
+- Use of ES6 modules, instead of pure Angular modules.
+- Use of the ES6 class syntax
+- Type checking system during development to validate input
+- Type annotations to power dependency injection
 
 Typescript has syntax for each of these things
-	- The 'module' keyword
-	- Support for ES6 class syntax
-	- Type annotations throughout
+
+- The 'module' keyword
+- Support for ES6 class syntax
+- Type annotations throughout
 
 We've actually written code this way already. Angular modules encapsulate all related functionality, and declare their dependencies. In index.js, each call to module.controller or module.service, is an effective class definition. And we've used consistent structure in our data, though it's never been formalized. For the rest of the tutorial, we'll take this existing structure, and make it explicit to the compiler using the Typescript / ES6 syntax.
 
@@ -144,6 +146,7 @@ Next, we'll begin transpiling our first service. We'll introduce another way to 
 
 First, we'll extract the CartService code from the Javascript and paste it into CartService.ts
 
+	// The existing Cart Service (abbreviated)
 	angular.module('futureStore.cart').service('CartService', ['$q', '$timeout', '$document', function($q, $timeout, $document){
 		// Service factory function body
 
@@ -151,9 +154,11 @@ First, we'll extract the CartService code from the Javascript and paste it into 
 
 		// Public function - loadCartData()
 		this.loadCartData = function () {/* ... */};
+
+		/* More Functions */
     }]);
 
-If you've written an Angular service before, you're likely already following patterns related to accesibility. Variables which are defined in the body of the function are private. Variables which are attached to the function using the 'this' keyword (for example, ths.loadCartData) are public. Some authors of Angular services choose to expose the service in the following fashion:
+If you've written an Angular service before, you're likely already following patterns to keep things public and private. Variables which are defined in the body of the function are private. Variables which are attached to the function using the 'this' keyword (for example, ths.loadCartData) are public. Some authors of Angular services choose to expose the service in the following fashion:
 	
 	
 	module.service('SomeService', function(){
@@ -171,7 +176,7 @@ If you've written an Angular service before, you're likely already following pat
 		};
 	});
 
-In each circumstance, there's a separation between public and private methods and properties. Typescript takes this information and makes it explicit:
+Typescript takes this information and makes it explicit:
 
 	// Declare a class with an empty constructor function
 	class SomeService
@@ -190,33 +195,42 @@ In each circumstance, there's a separation between public and private methods an
 	// Angular is injected with a service called SomeService.
 	module.service('SomeService', SomeService);
 
+You may be wondering how this translates to the outputted Javascript. In Typescript, each function in a class definition is defined on the prototype of the class. Each object, string, or number initialization is coded into the constructor function. In the traditional sense, 'private' variables are not possible with Typescript. However, since Typescript uses a compiler, accessing public/private methods is strictly enforced.
+
 More information can be found on TypeScript classes at:
 	http://www.typescriptlang.org/Handbook#classes
 
-## ES6 classes and dependency injection
+## ES6 classes and Dependency Injection
 
-You may be wondering, 'How do I do dependency injection with Typescript'? Angular defines three methods for defining dependency injection:
+Class notation is a far cry from the style of Dependency Injection that we've displayed in the Javascript so far. You may be wondering, 'How do I do dependency injection with Typescript and classes'? Thankfully, Angular has provided a means to do Dependency Injection which fully supports classes.
 
-	- Using an inline array.
-		Example: 
-		module.service('NeedyService', ['$http', function($http){
+Angular defines three methods for defining dependency injection:
 
-			}]);
+- Using an inline array.
 
-	- Using the naming of function variables
-		Example:
-		module.service('NeedyService', function($http){
+	//Use an array (you've probably gotten used to this)
+	
+	module.service('NeedyService', ['$http', function($http){
 
-			});
+		}]);
 
-	- Using a public property $inject
-		Example:
+- Using the naming of function variables
 
-		function NeedyService($http){
+	//Using function parameter names (hopefully you aren't used to this)
+	
+	module.service('NeedyService', function($http){
 
-		};
-		NeedyService.$inject = ['$http'];
-		module.service('NeedyService', NeedyService);
+		});
+
+- Using a public property $inject
+
+	//Using a static property $inject (What you'll be used to with Typescript classes)
+
+	function NeedyService($http){
+
+	};
+	NeedyService.$inject = ['$http'];
+	module.service('NeedyService', NeedyService);
 
 For Typescript and ES6 classes, we'll use the third method. Typescript provides the *static* keyword, allowing properties and method to be defined on the class constructor function itself, rather than on the prototype.
 
@@ -261,15 +275,71 @@ Now that we've seen a few examples, let's refactor the CartService to use AMD mo
 	}
 	_module.ngModule.service('CartService', CartService);
 
-Typescript uses immediately invoked functions to define classes. While we could have injected $q, $timeout, and $document into the service as instance variables (using *this*), instead, we've injected them onto CartService (the class itself). This has an advantage of increasing minification when the code moves into production.
+Here's a breakdown of what we're doing to register the CartService class with Angular.
+
+	import _module = require('_module');
+
+In this step, we're importing all the exports which originate in _module. The shape of this object will look like this.
+
+	// The exports of _module.ts
+	{
+		ngModule: angular.module() // 
+	}
+
+Next, we export a class, *CartService*
+
+	export class CartService
+	{
+		// Definition
+	}
+
+This introduces both an Interface for Typescript's type checking system, and actual Javascript code. It's attached to the exports object which will be accesible to other files which import CartService.ts
+
+In our definition of the class, we define $inject. This provides the Angular module with the names of components which should be injected.
+
+	static $inject = ['$q', '$timeout', '$document'];
+
+Finally, we register the service with the Angular module we got from _module.ts.
+
+	_module.ngModule.service('CartService', CartService);
+
+Inside the constructor function (which is what the generated CartServiceProvider will call with the injected dependencies) we're initializing CartService, and registering the injected functions onto the CartService class itself for future use.
+
+    constructor($q, $timeout, $document){
+        CartService.$q = $q;
+        CartService.$timeout = $timeout;
+        CartService.$document = $document;
+
+        /* Rest of initialization */
+    }
+
+While this may be fine and dandy for ES6 classes, it's not going to fly by the Typescript type checker. Why? CartSerice doesn't HAVE $q, $timeout, or $document as part of its definition. Trying to assign them a value breaks the definition of the type. We fix that by declaring them (but not initializing them) in the class definition.
+
+	export class CartService
+	{
+		static $q;
+		static $timeout;
+		static $document;
+	}
+
+Believe it or not, this is a "good thing". Type checking ensures that your errors are related to business logic - Not problems with mis-spelled variables, or improperly invoked methods.
+
+You may be asking, 'Why are these being declared as static? WHy not just declare them as part of CartService?' The reason for this is purely subjective, and more influenced by minification than any issue related to functionality. In the output Javascript, Typescript uses immediately invoked functions to define classes. By injecting the services onto CartService (the class itself), we are left with a variable which can be safely minified, whereas 'this' will unforunately consistenlty be four characters long.
 
 ## Transpilation
 
 The similarity between Typescript and Javascript affords a huge benefit when transpiling code between the two languages. If you're proficient with a text editor which supports multiple carets (think Sublime Text), you can convert the entirety of index.js to this new format in under an hour.
 
-Using Typescript and the AMD module syntax can improve the structure of a large Angular application. Here's how I've gone about organizing the code in this tutorial, and some of the conventions I've taken for real world projects:
 
-### _index.ts
+### Project Structure
+
+Using Typescript and the AMD module syntax can improve the structure of a large Angular application. While there are multiple ways to organize Angular applications with Typescript, following a consistent pattern is a surefire way to improve structure, and reduce error. Here's just one method which works for my purposes.
+
+By giving a folder to each Angular module in the project, the ease of navigating a large codebase is greatly increased. That said, there needs to be a consistent method of gathering these files to deliver them to the browser.
+
+The _index.ts and _module.ts files accomplish this purpose. _index.ts files strictly load in the other files in the folder. _module.ts files only define the Angular module. In my workplace, we also place various run blocks in these files.
+
+#### _index.ts Example
 
 The _index files, as mentioned, import each other file in the folder. These are then exported as one object which we'll name in accordance with the module it represents.
 
@@ -289,7 +359,11 @@ The _index files, as mentioned, import each other file in the folder. These are 
 	    ShoppingCartController: shoppingCart.ShoppingCartController
 	};
 
-By referencing all required code in one file, other modules which are dependant on the cart module can import the code in one line. Here's an example of this practice from another _module file, checkout.
+By referencing all required code in one file, other modules which are dependant on the cart module can import the code in one line. 
+
+#### _module.ts Example
+
+Here's an example of a _module.ts file. Unsurprizingly, it's very small. However, it's important to notice the two import statements at the top. These correspond to the dependant modules that futureStore.checkout relies upon, and guarantees that all required modules are loaded, and in proper order.
 
 	// checkout/_module.ts
 
@@ -302,10 +376,3 @@ By referencing all required code in one file, other modules which are dependant 
 	        'futureStore.orders',
 	        'futureStore.cart']);
 
-Here, we see the 'futureStore.checkout' module being defined, but not before the dependencies, the orders, and cart module, have been imported.
-
-### CartService.ts
-
-
-
-If you've taken the time to look at the repository

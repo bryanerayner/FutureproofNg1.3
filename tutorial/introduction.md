@@ -31,13 +31,3 @@ One of Angular 2.0's primary features is the introduction of class annotation an
 may have noticed, AtScript has been designed as a superset of the TypeSript syntax for checking types. While
 AtScript won't be available to use in development until Angular 2.0 is released, TypeScript is a mature platform
 available for use today.
-
-
-
-
-Typescript
-The Build Process
-The Application
-Transitioning to AtScript
-
-
